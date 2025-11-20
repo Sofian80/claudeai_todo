@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - Daily Planner{% endblock %}
+
+{% block extra_css %}
+<style>
+    .form-container {
+        max-width: 500px;
+        margin: 50px auto;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <div class="card">
+            <div class="card-body p-4">
+                <h2 class="card-title mb-4">Register for Daily Planner</h2>
+
+                <form method="POST" action="{% url 'register' %}">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label">Username:</label>
+                        {{ form.username }}
+                        {% if form.username.help_text %}
+                            <div class="form-text">{{ form.username.help_text }}</div>
+                        {% endif %}
+                        {% if form.username.errors %}
+                            <div class="text-danger">{{ form.username.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_password1" class="form-label">Password:</label>
+                        {{ form.password1 }}
+                        {% if form.password1.help_text %}
+                            <div class="form-text">{{ form.password1.help_text }}</div>
+                        {% endif %}
+                        {% if form.password1.errors %}
+                            <div class="text-danger">{{ form.password1.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_password2" class="form-label">Confirm Password:</label>
+                        {{ form.password2 }}
+                        {% if form.password2.help_text %}
+                            <div class="form-text">{{ form.password2.help_text }}</div>
+                        {% endif %}
+                        {% if form.password2.errors %}
+                            <div class="text-danger">{{ form.password2.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Register</button>
+                </form>
+
+                <p class="mt-4">
+                    Already have an account? <a href="{% url 'login' %}">Login here</a>
+                </p>
+                <p>
+                    <a href="{% url 'home' %}">Back to Home</a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

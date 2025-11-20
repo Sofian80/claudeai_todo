@@ -1,2 +1,159 @@
-<h1>Welcome to my calendar!</h1
-<h2>Daily Planner</h2>
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block title %}Daily Planner - Home{% endblock %}
+
+{% block content %}
+    <div class="bg-light p-4 rounded mb-4 mt-4">
+        <h1>Welcome to my calendar!</h1>
+        <h2 class="text-secondary">Daily Planner</h2>
+    </div>
+
+    {% if user.is_authenticated %}
+        <div class="alert alert-success mb-4">
+            <h3>Hello, {{ user.username }}!</h3>
+            <p>You are logged in and ready to use your daily planner.</p>
+            <form method="POST" action="{% url 'logout' %}" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+        </div>
+
+        <!-- Calendar Navigation -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <a href="?year={{ prev_year }}&month={{ prev_month }}" class="btn btn-dark nav-arrow">&larr; Previous</a>
+            <h2>{{ month_name }} {{ year }}</h2>
+            <a href="?year={{ next_year }}&month={{ next_month }}" class="btn btn-dark nav-arrow">Next &rarr;</a>
+        </div>
+
+        <!-- Calendar Grid -->
+        <div class="calendar-container">
+            <table class="table table-bordered calendar-table">
+                <thead>
+                    <tr>
+                        <th>Sunday</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        <th>Saturday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for week in calendar %}
+                    <tr>
+                        {% for day in week %}
+                        <td class="calendar-day {% if day == today.day and month == today.month and year == today.year %}today{% endif %}">
+                            {% if day != 0 %}
+                                <a href="{% url 'day' year month day %}" class="day-link">
+                                    <div class="day-number">{{ day }}</div>
+                                    {% if day in todo_counts %}
+                                        <div class="todo-badge">{{ todo_counts|get_item:day }} task{{ todo_counts|get_item:day|pluralize }}</div>
+                                    {% endif %}
+                                </a>
+                            {% endif %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <style>
+            /* Navigation arrows */
+            .nav-arrow {
+                background-color: #000;
+                border-color: #000;
+                color: white;
+                transition: background-color 0.3s, border-color 0.3s;
+            }
+
+            .nav-arrow:hover {
+                background-color: #198754;
+                border-color: #198754;
+                color: white;
+            }
+
+            .calendar-table {
+                background: #2c2c2c;
+                font-size: 1.1rem;
+                border-color: #495057;
+            }
+
+            .calendar-table th {
+                background-color: #212529;
+                color: white;
+                text-align: center;
+                padding: 15px;
+                font-weight: bold;
+                border-color: #495057;
+            }
+
+            .calendar-day {
+                height: 120px;
+                vertical-align: top;
+                padding: 0;
+                position: relative;
+                background-color: white;
+                border-color: #495057;
+            }
+
+            .calendar-day.today .day-link {
+                background-color: #d8f3e5;
+            }
+
+            .calendar-day.today .day-number {
+                color: #000;
+            }
+
+            .day-link {
+                display: block;
+                width: 100%;
+                height: 100%;
+                padding: 10px;
+                text-decoration: none;
+                color: inherit;
+                transition: background-color 0.3s;
+            }
+
+            .day-link:hover {
+                background-color: #d8f3e5;
+                text-decoration: none;
+            }
+
+            .day-link:hover .day-number {
+                color: #000;
+            }
+
+            .day-number {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: #000;
+                margin-bottom: 5px;
+                transition: color 0.3s;
+            }
+
+            .todo-badge {
+                background-color: #198754;
+                color: white;
+                padding: 3px 8px;
+                border-radius: 12px;
+                font-size: 0.85rem;
+                display: inline-block;
+                margin-top: 5px;
+            }
+
+            .calendar-container {
+                margin-bottom: 30px;
+            }
+        </style>
+
+    {% else %}
+        <div class="alert alert-warning">
+            <h3>Welcome, Guest!</h3>
+            <p>Please <a href="{% url 'login' %}" class="alert-link">login</a> or <a href="{% url 'register' %}" class="alert-link">register</a> to use your daily planner.</p>
+        </div>
+    {% endif %}
+{% endblock %}

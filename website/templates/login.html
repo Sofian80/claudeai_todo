@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Daily Planner{% endblock %}
+
+{% block extra_css %}
+<style>
+    .form-container {
+        max-width: 500px;
+        margin: 50px auto;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <div class="card">
+            <div class="card-body p-4">
+                <h2 class="card-title mb-4">Login to Daily Planner</h2>
+
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label">Username:</label>
+                        <input type="text" name="username" class="form-control" id="id_username" required>
+                        {% if form.username.errors %}
+                            <div class="text-danger">{{ form.username.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_password" class="form-label">Password:</label>
+                        <input type="password" name="password" class="form-control" id="id_password" required>
+                        {% if form.password.errors %}
+                            <div class="text-danger">{{ form.password.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+
+                <p class="mt-4">
+                    Don't have an account? <a href="{% url 'register' %}">Register here</a>
+                </p>
+                <p>
+                    <a href="{% url 'home' %}">Back to Home</a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
