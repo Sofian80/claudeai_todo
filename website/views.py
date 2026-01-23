@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
+from .forms import RegisterForm, ProfileForm, ProfilePasswordForm
+from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Todo
@@ -61,7 +63,7 @@ def home(request):
 
 def register_user(request):
 	if request.method == 'POST':
-		form = UserCreationForm(request.POST)
+		form = RegisterForm(request.POST)
 		if form.is_valid():
 			form.save()
 			username = form.cleaned_data['username']
@@ -71,7 +73,7 @@ def register_user(request):
 			messages.success(request, 'Registration successful! Welcome!')
 			return redirect('home')
 	else:
-		form = UserCreationForm()
+		form = RegisterForm()
 
 	return render(request, 'register.html', {'form': form})
 
@@ -97,6 +99,36 @@ def logout_user(request):
 	logout(request)
 	messages.success(request, 'You have been logged out.')
 	return redirect('home')
+
+@login_required
+def profile(request):
+	if request.method == 'POST':
+		if 'update_profile' in request.POST:
+			profile_form = ProfileForm(request.POST, instance=request.user)
+			password_form = ProfilePasswordForm(request.user)
+			if profile_form.is_valid():
+				profile_form.save()
+				messages.success(request, 'Your profile has been updated.')
+				return redirect('profile')
+		elif 'change_password' in request.POST:
+			profile_form = ProfileForm(instance=request.user)
+			password_form = ProfilePasswordForm(request.user, request.POST)
+			if password_form.is_valid():
+				user = password_form.save()
+				update_session_auth_hash(request, user)
+				messages.success(request, 'Your password has been changed.')
+				return redirect('profile')
+		else:
+			profile_form = ProfileForm(instance=request.user)
+			password_form = ProfilePasswordForm(request.user)
+	else:
+		profile_form = ProfileForm(instance=request.user)
+		password_form = ProfilePasswordForm(request.user)
+
+	return render(request, 'profile.html', {
+		'profile_form': profile_form,
+		'password_form': password_form,
+	})
 
 @login_required
 def day_view(request, year, month, day):

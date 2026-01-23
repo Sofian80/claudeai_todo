@@ -2,14 +2,6 @@
 
 {% block title %}Login - Daily Planner{% endblock %}
 
-{% block extra_css %}
-<style>
-    .form-container {
-        max-width: 500px;
-        margin: 50px auto;
-    }
-</style>
-{% endblock %}
 
 {% block content %}
     <div class="form-container">
@@ -30,7 +22,12 @@
 
                     <div class="mb-3">
                         <label for="id_password" class="form-label">Password:</label>
-                        <input type="password" name="password" class="form-control" id="id_password" required>
+                        <div class="input-group">
+                            <input type="password" name="password" class="form-control" id="id_password" required>
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                <i class="bi bi-eye" id="passwordIcon"></i>
+                            </button>
+                        </div>
                         {% if form.password.errors %}
                             <div class="text-danger">{{ form.password.errors }}</div>
                         {% endif %}

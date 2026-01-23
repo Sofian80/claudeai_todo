@@ -1,0 +1,480 @@
+/* ================================
+   Global Styles & Theme Colors
+   ================================ */
+
+/* ================================
+   Form Container (Login, Register, Profile)
+   ================================ */
+.form-container {
+    max-width: 500px;
+    margin: 50px auto;
+}
+
+.form-container .card {
+    background-color: #2c2c2c;
+    border-color: #495057;
+}
+
+.form-container .card-body {
+    color: white;
+}
+
+.form-container .card-title {
+    color: white;
+    font-weight: bold;
+}
+
+.form-container .form-label {
+    color: white;
+}
+
+.form-container .form-control {
+    background-color: #212529;
+    border-color: #495057;
+    color: white;
+}
+
+.form-container .form-control:focus {
+    background-color: #212529;
+    border-color: #198754;
+    color: white;
+    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+.form-container .form-text {
+    color: #adb5bd;
+}
+
+.form-container .btn-outline-secondary {
+    background-color: #212529;
+    border-color: #495057;
+    color: white;
+}
+
+.form-container .btn-outline-secondary:hover {
+    background-color: #198754;
+    border-color: #198754;
+    color: white;
+}
+
+.form-container .btn-primary,
+.form-container .btn-success {
+    background-color: #000;
+    border-color: #000;
+    color: white;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.form-container .btn-primary:hover,
+.form-container .btn-success:hover {
+    background-color: #198754;
+    border-color: #198754;
+}
+
+.form-container a {
+    color: #198754;
+    text-decoration: none;
+}
+
+.form-container a:hover {
+    color: #20c997;
+    text-decoration: underline;
+}
+
+/* Profile Page Specific */
+.section-divider {
+    border-top: 1px solid #495057;
+    margin: 30px 0;
+}
+
+.section-title {
+    color: #adb5bd;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+/* ================================
+   Calendar (Home Page)
+   ================================ */
+.calendar-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 10px;
+}
+
+.calendar-title {
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.nav-arrow {
+    background-color: #000;
+    border-color: #000;
+    color: white;
+    transition: background-color 0.3s, border-color 0.3s;
+    white-space: nowrap;
+}
+
+.nav-arrow:hover {
+    background-color: #198754;
+    border-color: #198754;
+    color: white;
+}
+
+.nav-short {
+    display: none;
+}
+
+.day-short {
+    display: none;
+}
+
+.calendar-container {
+    margin-bottom: 30px;
+    overflow-x: auto;
+}
+
+.calendar-table {
+    background: #2c2c2c;
+    font-size: 1.1rem;
+    border-color: #495057;
+    width: 100%;
+    min-width: 100%;
+}
+
+.calendar-table th {
+    background-color: #212529;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-weight: bold;
+    border-color: #495057;
+}
+
+.calendar-day {
+    height: 120px;
+    vertical-align: top;
+    padding: 0;
+    position: relative;
+    background-color: white;
+    border-color: #495057;
+}
+
+.calendar-day.today .day-link {
+    background-color: #d8f3e5;
+}
+
+.calendar-day.today .day-number {
+    color: #000;
+}
+
+.day-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.3s;
+}
+
+.day-link:hover {
+    background-color: #d8f3e5;
+    text-decoration: none;
+}
+
+.day-link:hover .day-number {
+    color: #000;
+}
+
+.day-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 5px;
+    transition: color 0.3s;
+}
+
+.todo-badge {
+    background-color: #198754;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    display: inline-block;
+    margin-top: 5px;
+    text-align: center;
+}
+
+/* ================================
+   Day View (Schedule)
+   ================================ */
+.schedule-container {
+    max-height: 800px;
+    overflow-y: auto;
+    background-color: #2c2c2c;
+}
+
+.hour-row {
+    display: flex;
+    border-bottom: 1px solid #495057;
+    min-height: 80px;
+}
+
+.hour-row:hover {
+    background-color: #3a3a3a;
+}
+
+.time-label {
+    width: 120px;
+    padding: 15px;
+    background-color: #212529;
+    color: white;
+    border-right: 2px solid #495057;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.task-area {
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: white;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    background-color: #f8f9fa;
+    border: 1px solid #495057;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.task-item:hover {
+    background-color: #d8f3e5;
+}
+
+.task-item.completed-task {
+    background-color: #e8f5e9;
+}
+
+.task-text {
+    flex: 1;
+}
+
+.toggle-form,
+.delete-form {
+    margin: 0;
+}
+
+.add-task-form {
+    margin-top: 5px;
+}
+
+.completed-task {
+    opacity: 0.7;
+}
+
+/* Button Styles */
+.btn-add-task {
+    background-color: #198754;
+    color: white;
+    border: none;
+    padding: 0.375rem 0.75rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-add-task:hover {
+    background-color: #157347;
+}
+
+.btn-dark-theme {
+    background-color: #000;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-dark-theme:hover {
+    background-color: #198754;
+}
+
+/* Override Bootstrap btn-secondary for calendar theme */
+.btn-secondary {
+    background-color: #000;
+    border-color: #000;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: #198754;
+    border-color: #198754;
+}
+
+/* ================================
+   Responsive Design
+   ================================ */
+
+/* Tablet */
+@media (max-width: 992px) {
+    .calendar-day {
+        height: 100px;
+    }
+
+    .day-number {
+        font-size: 1.3rem;
+    }
+
+    .todo-badge {
+        font-size: 0.75rem;
+        padding: 2px 6px;
+    }
+
+    .calendar-table th {
+        padding: 10px 5px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    /* Calendar Navigation */
+    .nav-full {
+        display: none;
+    }
+
+    .nav-short {
+        display: inline;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .nav-arrow {
+        padding: 0.5rem 1rem;
+        min-width: 50px;
+    }
+
+    .calendar-title {
+        font-size: 1.3rem;
+    }
+
+    /* Day Names */
+    .day-full {
+        display: none;
+    }
+
+    .day-short {
+        display: inline;
+    }
+
+    /* Calendar Grid */
+    .calendar-table {
+        font-size: 0.9rem;
+    }
+
+    .calendar-table th {
+        padding: 8px 2px;
+        font-size: 0.8rem;
+    }
+
+    .calendar-day {
+        height: 70px;
+    }
+
+    .day-link {
+        padding: 5px;
+    }
+
+    .day-number {
+        font-size: 1.1rem;
+        margin-bottom: 2px;
+    }
+
+    .todo-badge {
+        font-size: 0.65rem;
+        padding: 2px 4px;
+        border-radius: 8px;
+        margin-top: 2px;
+    }
+
+    /* Day View */
+    .hour-row {
+        flex-direction: column;
+    }
+
+    .time-label {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #495057;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .calendar-nav {
+        flex-wrap: nowrap;
+    }
+
+    .calendar-title {
+        font-size: 1.1rem;
+    }
+
+    .nav-arrow {
+        padding: 0.4rem 0.8rem;
+    }
+
+    .calendar-day {
+        height: 60px;
+    }
+
+    .day-number {
+        font-size: 1rem;
+    }
+
+    .todo-badge {
+        font-size: 0.6rem;
+        padding: 1px 3px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
+
+    /* Show just number on very small screens */
+    .todo-badge-text {
+        display: none;
+    }
+
+    /* Welcome section */
+    .bg-light h1 {
+        font-size: 1.5rem;
+    }
+
+    .bg-light h2 {
+        font-size: 1.1rem;
+    }
+
+    .alert h3 {
+        font-size: 1.2rem;
+    }
+}

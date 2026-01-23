@@ -20,10 +20,10 @@
         </div>
 
         <!-- Calendar Navigation -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <a href="?year={{ prev_year }}&month={{ prev_month }}" class="btn btn-dark nav-arrow">&larr; Previous</a>
-            <h2>{{ month_name }} {{ year }}</h2>
-            <a href="?year={{ next_year }}&month={{ next_month }}" class="btn btn-dark nav-arrow">Next &rarr;</a>
+        <div class="calendar-nav">
+            <a href="?year={{ prev_year }}&month={{ prev_month }}" class="btn btn-dark nav-arrow"><span class="nav-full">&larr; Previous</span><span class="nav-short">&larr;</span></a>
+            <h2 class="calendar-title">{{ month_name }} {{ year }}</h2>
+            <a href="?year={{ next_year }}&month={{ next_month }}" class="btn btn-dark nav-arrow"><span class="nav-full">Next &rarr;</span><span class="nav-short">&rarr;</span></a>
         </div>
 
         <!-- Calendar Grid -->
@@ -31,13 +31,13 @@
             <table class="table table-bordered calendar-table">
                 <thead>
                     <tr>
-                        <th>Sunday</th>
-                        <th>Monday</th>
-                        <th>Tuesday</th>
-                        <th>Wednesday</th>
-                        <th>Thursday</th>
-                        <th>Friday</th>
-                        <th>Saturday</th>
+                        <th><span class="day-full">Sunday</span><span class="day-short">Sun</span></th>
+                        <th><span class="day-full">Monday</span><span class="day-short">Mon</span></th>
+                        <th><span class="day-full">Tuesday</span><span class="day-short">Tue</span></th>
+                        <th><span class="day-full">Wednesday</span><span class="day-short">Wed</span></th>
+                        <th><span class="day-full">Thursday</span><span class="day-short">Thu</span></th>
+                        <th><span class="day-full">Friday</span><span class="day-short">Fri</span></th>
+                        <th><span class="day-full">Saturday</span><span class="day-short">Sat</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,7 +49,7 @@
                                 <a href="{% url 'day' year month day %}" class="day-link">
                                     <div class="day-number">{{ day }}</div>
                                     {% if day in todo_counts %}
-                                        <div class="todo-badge">{{ todo_counts|get_item:day }} task{{ todo_counts|get_item:day|pluralize }}</div>
+                                        <div class="todo-badge"><span class="todo-badge-count">{{ todo_counts|get_item:day }}</span><span class="todo-badge-text"> task{{ todo_counts|get_item:day|pluralize }}</span></div>
                                     {% endif %}
                                 </a>
                             {% endif %}
@@ -60,95 +60,6 @@
                 </tbody>
             </table>
         </div>
-
-        <style>
-            /* Navigation arrows */
-            .nav-arrow {
-                background-color: #000;
-                border-color: #000;
-                color: white;
-                transition: background-color 0.3s, border-color 0.3s;
-            }
-
-            .nav-arrow:hover {
-                background-color: #198754;
-                border-color: #198754;
-                color: white;
-            }
-
-            .calendar-table {
-                background: #2c2c2c;
-                font-size: 1.1rem;
-                border-color: #495057;
-            }
-
-            .calendar-table th {
-                background-color: #212529;
-                color: white;
-                text-align: center;
-                padding: 15px;
-                font-weight: bold;
-                border-color: #495057;
-            }
-
-            .calendar-day {
-                height: 120px;
-                vertical-align: top;
-                padding: 0;
-                position: relative;
-                background-color: white;
-                border-color: #495057;
-            }
-
-            .calendar-day.today .day-link {
-                background-color: #d8f3e5;
-            }
-
-            .calendar-day.today .day-number {
-                color: #000;
-            }
-
-            .day-link {
-                display: block;
-                width: 100%;
-                height: 100%;
-                padding: 10px;
-                text-decoration: none;
-                color: inherit;
-                transition: background-color 0.3s;
-            }
-
-            .day-link:hover {
-                background-color: #d8f3e5;
-                text-decoration: none;
-            }
-
-            .day-link:hover .day-number {
-                color: #000;
-            }
-
-            .day-number {
-                font-size: 1.5rem;
-                font-weight: bold;
-                color: #000;
-                margin-bottom: 5px;
-                transition: color 0.3s;
-            }
-
-            .todo-badge {
-                background-color: #198754;
-                color: white;
-                padding: 3px 8px;
-                border-radius: 12px;
-                font-size: 0.85rem;
-                display: inline-block;
-                margin-top: 5px;
-            }
-
-            .calendar-container {
-                margin-bottom: 30px;
-            }
-        </style>
 
     {% else %}
         <div class="alert alert-warning">

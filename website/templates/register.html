@@ -2,15 +2,6 @@
 
 {% block title %}Register - Daily Planner{% endblock %}
 
-{% block extra_css %}
-<style>
-    .form-container {
-        max-width: 500px;
-        margin: 50px auto;
-    }
-</style>
-{% endblock %}
-
 {% block content %}
     <div class="form-container">
         <div class="card">
@@ -32,8 +23,24 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="id_email" class="form-label">Email:</label>
+                        {{ form.email }}
+                        {% if form.email.help_text %}
+                            <div class="form-text">{{ form.email.help_text }}</div>
+                        {% endif %}
+                        {% if form.email.errors %}
+                            <div class="text-danger">{{ form.email.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
                         <label for="id_password1" class="form-label">Password:</label>
-                        {{ form.password1 }}
+                        <div class="input-group">
+                            {{ form.password1 }}
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword1">
+                                <i class="bi bi-eye" id="passwordIcon1"></i>
+                            </button>
+                        </div>
                         {% if form.password1.help_text %}
                             <div class="form-text">{{ form.password1.help_text }}</div>
                         {% endif %}
@@ -44,7 +51,12 @@
 
                     <div class="mb-3">
                         <label for="id_password2" class="form-label">Confirm Password:</label>
-                        {{ form.password2 }}
+                        <div class="input-group">
+                            {{ form.password2 }}
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword2">
+                                <i class="bi bi-eye" id="passwordIcon2"></i>
+                            </button>
+                        </div>
                         {% if form.password2.help_text %}
                             <div class="form-text">{{ form.password2.help_text }}</div>
                         {% endif %}
